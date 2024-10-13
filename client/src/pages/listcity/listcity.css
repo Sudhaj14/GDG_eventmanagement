@@ -84,5 +84,5 @@
 
   .kuku{
     background-image: linear-gradient(rgba(0, 0, 0, 0.5),
-                       rgba(0, 0, 0, 0.5)), url("/Users/egapraneeth/Desktop/Minor Project/client/src/pages/home/homebg.jpeg");
+                       rgba(0, 0, 0, 0.5));
 }

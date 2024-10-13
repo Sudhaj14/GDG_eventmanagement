@@ -2,9 +2,7 @@ import axios from "axios";
 import { useContext, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
-import "./Signup.css";
 import Navbar from "../components/navbar/Navbar.jsx";
-
 
 const Signup = () => {
   const [credentials, setCredentials] = useState({
@@ -17,47 +15,35 @@ const Signup = () => {
   });
 
   const { loading, error, dispatch } = useContext(AuthContext);
-
   const navigate = useNavigate();
 
-  //   Handle Change Function
+  // Handle Change Function
   const handleChange = (e) => {
     setCredentials((prev) => ({ ...prev, [e.target.id]: e.target.value }));
   };
 
-  //   Handle Click Function
+  // Handle Click Function
   const handleClick = async (e) => {
     e.preventDefault();
     dispatch({ type: "REGISTER_START" });
     try {
-      const res = await axios.post(
-        "/auth/register",
-        credentials
-      );
+      const res = await axios.post("/auth/register", credentials);
       dispatch({ type: "REGISTER_SUCCESS", payload: res.data.details });
       navigate("/login");
     } catch (error) {
       dispatch({ type: "REGISTER_FAILURE", payload: error.response.data });
     }
   };
+
   return (
-    <div>
-      <Navbar/>
-    <div className="mainContainer">
-      <div className="contentArea">
-        <div className="right">
-          <h1>Create an Account!</h1>
-          
+    <div className="bg-gray-100 min-h-screen">
+      <Navbar />
+      <div className="flex justify-center items-center h-full">
+        <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
+          <h1 className="text-2xl font-bold text-center mb-6">Create an Account!</h1>
           <form>
             <input
-              style={{
-                width: "100%",
-                padding: "15px",
-                border: "none",
-                outline: "none",
-                backgroundColor: "#ddd",
-                borderRadius: "5px",
-              }}
+              className="w-full p-3 border border-gray-300 rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-blue-400"
               type="text"
               placeholder="Username"
               id="username"
@@ -65,78 +51,39 @@ const Signup = () => {
               required
             />
             <input
-              style={{
-                width: "100%",
-                padding: "15px",
-                border: "none",
-                outline: "none",
-                backgroundColor: "#ddd",
-                borderRadius: "5px",
-              }}
+              className="w-full p-3 border border-gray-300 rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-blue-400"
               type="email"
               placeholder="Email"
               id="email"
               onChange={handleChange}
               required
             />
-
             <input
-              style={{
-                width: "100%",
-                padding: "15px",
-                border: "none",
-                outline: "none",
-                backgroundColor: "#ddd",
-                borderRadius: "5px",
-              }}
+              className="w-full p-3 border border-gray-300 rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-blue-400"
               type="text"
               placeholder="Phone"
               id="phone"
               onChange={handleChange}
               required
             />
-
             <input
-              style={{
-                width: "100%",
-                padding: "15px",
-                border: "none",
-                outline: "none",
-                backgroundColor: "#ddd",
-                borderRadius: "5px",
-              }}
+              className="w-full p-3 border border-gray-300 rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-blue-400"
               type="text"
               placeholder="City"
               id="city"
               onChange={handleChange}
               required
             />
-
             <input
-              style={{
-                width: "100%",
-                padding: "15px",
-                border: "none",
-                outline: "none",
-                backgroundColor: "#ddd",
-                borderRadius: "5px",
-              }}
+              className="w-full p-3 border border-gray-300 rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-blue-400"
               type="text"
               placeholder="Country"
               id="country"
               onChange={handleChange}
               required
             />
-
             <input
-              style={{
-                width: "100%",
-                padding: "15px",
-                border: "none",
-                outline: "none",
-                backgroundColor: "#ddd",
-                borderRadius: "5px",
-              }}
+              className="w-full p-3 border border-gray-300 rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-blue-400"
               type="password"
               placeholder="Password"
               id="password"
@@ -144,15 +91,17 @@ const Signup = () => {
               required
             />
 
-            <button disabled={loading} onClick={handleClick}>
-              Sign up
+            <button
+              disabled={loading}
+              onClick={handleClick}
+              className="w-full bg-blue-600 text-white rounded-md p-3 hover:bg-blue-700 transition duration-200"
+            >
+              Sign Up
             </button>
-            {error && <span>{error.message}</span>}
+            {error && <span className="text-red-500 mt-4 text-center block">{error.message}</span>}
           </form>
         </div>
-        
       </div>
-    </div>
     </div>
   );
 };
